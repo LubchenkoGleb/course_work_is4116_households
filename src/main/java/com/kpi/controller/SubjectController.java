@@ -1,9 +1,6 @@
 package com.kpi.controller;
 
 import com.kpi.model.Subject;
-import com.kpi.model.Subject;
-import com.kpi.model.Teacher;
-import com.kpi.service.SubjectService;
 import com.kpi.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
