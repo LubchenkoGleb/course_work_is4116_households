@@ -1,42 +1,38 @@
 package com.kpi.controller;
 
-import com.kpi.model.Teacher;
-import com.kpi.service.TeacherService;
+import com.kpi.model.FamilyBudget;
+import com.kpi.model.FamilyMember;
+import com.kpi.service.FamilyMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by gleb on 06.12.16.
+ * Created by gleb on 09.12.16.
  */
+
 @Controller
-@RequestMapping(value = "/teacher")
-public class TeacherController {
+@RequestMapping(value = "/familymember")
+public class FamilyMemberController {
 
     @Autowired
-    TeacherService teacherService;
+    FamilyMemberService familyMemberService;
 
     @RequestMapping(value = "/get")
     public ModelAndView get(ModelAndView model){
-        model.setViewName("teacherslist");
-        model.addObject("teachers", teacherService.getAll());
+        model.setViewName("familymemberslist");
+        model.addObject("familymembers", familyMemberService.getAll());
         return model;
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView delete(@RequestParam Integer id, ModelAndView model){
         try {
-            teacherService.delete(id);
+            familyMemberService.delete(id);
         } catch (SQLException e) {
             model.addObject("exception", e.getMessage());
             e.printStackTrace();
@@ -46,17 +42,17 @@ public class TeacherController {
 
     @RequestMapping(value = "/preUpdate")
     public ModelAndView preUpdate(@RequestParam Integer id, ModelAndView model){
-        Teacher teacher = teacherService.getById(id);
-        model.setViewName("teacher");
-        model.addObject("teacher", teacher);
+        FamilyMember familyMember = familyMemberService.getById(id);
+        model.setViewName("familymember");
+        model.addObject("familymember", familyMember);
         model.addObject("operation", "update");
         return model;
     }
 
     @RequestMapping(value = "/update")
-    public ModelAndView update(Teacher teacher, ModelAndView model) {
+    public ModelAndView update(FamilyMember familyMember, ModelAndView model) {
         try {
-            teacherService.update(teacher);
+            familyMemberService.update(familyMember);
         } catch (SQLException e) {
             model.addObject("exception", e.getMessage());
             e.printStackTrace();
@@ -66,18 +62,18 @@ public class TeacherController {
 
     @RequestMapping(value = "/preInsert")
     public ModelAndView preInsert(ModelAndView model) throws SQLException {
-        model.setViewName("teacher");
-        Teacher teacher = new Teacher();
-        teacher.setId(teacherService.getMaxId() + 1);
-        model.addObject("teacher", teacher);
+        model.setViewName("familymember");
+        FamilyMember familyMember= new FamilyMember();
+        familyMember.setId(familyMemberService.getMaxId() + 1);
+        model.addObject("familymember", familyMember);
         model.addObject("operation", "insert");
         return model;
     }
 
     @RequestMapping(value = "/insert")
-    public ModelAndView insert(Teacher teacher, ModelAndView model) {
+    public ModelAndView insert(FamilyMember familyMember, ModelAndView model) {
         try {
-            teacherService.insert(teacher);
+            familyMemberService.insert(familyMember);
         } catch (SQLException e) {
             model.addObject("exception", e.getMessage());
             e.printStackTrace();

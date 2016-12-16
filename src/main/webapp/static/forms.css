@@ -1,0 +1,26 @@
+body {
+    padding: 10px;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+input[type="text"] {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    outline: none;
+    height: 24px;
+    width: 120px;
+    color: #cccccc;
+    margin: 5px;
+}
+p a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #cccccc;
+    border: 1px solid #e5e5e5;
+    height: 24px;
+    background-color: #cccccc;
+    width: 120px;
+    border-radius: 3px;
+}
